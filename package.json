@@ -1,0 +1,24 @@
+{
+  "name": "flaketrader",
+  "version": "1.0.0",
+  "description": "a discord bot to simulate trading in discord",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "pm2 start flaketrader.config.cjs",
+    "status": "pm2 status",
+    "stop": "pm2 stop all",
+    "restart": "pm2 restart all"
+  },
+  "author": "snowy",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "chart.js": "^4.5.1",
+    "chartjs-node-canvas": "^5.0.0",
+    "discord.js": "^14.25.1",
+    "node-fetch": "^3.3.2",
+    "pg": "^8.18.0",
+    "yahoo-finance2": "^3.13.0"
+  }
+}

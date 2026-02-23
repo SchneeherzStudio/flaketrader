@@ -1,0 +1,13 @@
+{
+  "help":{"active":true, "message":""},
+  "info":{"active":true, "message":""},
+  "status":{"active":true, "message":""},
+  "daily":{"active":true, "message":""},
+  "buy":{"active":true, "message":""},
+  "sell":{"active":true, "message":""},
+  "search":{"active":true, "message":""},
+  "market":{"active":true, "message":""},
+  "balance":{"active":true, "message":""},
+  "top":{"active":true, "message":""},
+  "global":{"active":true, "message":""}
+}
