@@ -7,6 +7,7 @@ FlakeTrader uses
 - yahoo-finance2
 - chartjs-node-canvas
 - PostgreSQL
+- pm2
 
 # Commands
 - /help (shows all commands of the bot)
