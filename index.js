@@ -6,6 +6,7 @@ import { Market } from './modules/market.mjs';
 import { HandleUserUpdates } from './modules/userHandling.mjs'
 import { baseCommands } from './modules/baseCommands.mjs';
 import { dbHelper } from './modules/database.mjs';
+import { updateDynamicStatus } from './modules/botStatus.mjs';
 
 const market = new Market();
 const HUU = new HandleUserUpdates();
@@ -87,20 +88,17 @@ async function syncExistingMembers(client) {
 }
 
 client.on('clientReady', async () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as ${client.user.tag}!`);
 
-    client.user.setPresence({
-        activities: [{ 
-            name: `Stock Prices`, // Der Text, der angezeigt wird (e.g. stock prices)
-            type: ActivityType.Watching, // (Playing, Watching, Listening, Streaming, Competing, Custom (name: "custom", state: "name for Presence"))
-            state: `shocked by BTC-USD`,
-            url: "https://snowy.ct.ws"
-        }],
-    });
+  await syncExistingMembers(client);
+  let topUser = await dbHelper.getLeaderboard(1);
+  await updateDynamicStatus(client, yahooFinance, topUser);
 
-    await syncExistingMembers(client);
-
-    console.log('Bot is ready.');
+  console.log('Bot is ready.');
+  setInterval(() => {
+    topUser = dbHelper.getLeaderboard(1);
+    updateDynamicStatus(client, yahooFinance, topUser)
+  }, 600000);
 });
 
 client.login(process.env.DISCORD_TOKEN);
