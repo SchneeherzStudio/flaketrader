@@ -27,3 +27,4 @@ FlakeTrader uses
 - /balance |user| (to see the balance of other users)
 - remove /status
 - gain dividends of supported assets
+- /send (send money to other users)
