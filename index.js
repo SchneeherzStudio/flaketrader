@@ -110,7 +110,8 @@ client.on('guildCreate', async (guild) => {
     try {
         const members = await guild.members.fetch();
         for (const member of members.values()) {
-            await dbHelper.registerGuildMember(member.id, guild.id);
+          if (member.user.bot) continue;
+          await dbHelper.registerGuildMember(member.id, guild.id);
         }
         console.log(`✅ Synced ${members.size} members for ${guild.name}`);
     } catch (e) {
@@ -128,12 +129,13 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 client.on('guildMemberRemove', async (member) => {
-    try {
-        await dbHelper.unregisterGuildMember(member.id, member.guild.id);
-        console.log(`User ${member.user.tag} wurde von Server ${member.guild.name} entfernt.`);
-    } catch (err) {
-        console.error("Fehler bei guildMemberRemove:", err);
-    }
+  if (member.user.bot) return;
+  try {
+    await dbHelper.unregisterGuildMember(member.id, member.guild.id);
+    console.log(`User ${member.user.tag} wurde von Server ${member.guild.name} entfernt.`);
+  } catch (err) {
+    console.error("Fehler bei guildMemberRemove:", err);
+  }
 });
 
 client.on('interactionCreate', async interaction => {
