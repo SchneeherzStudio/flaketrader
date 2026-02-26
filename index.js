@@ -95,8 +95,8 @@ client.on('clientReady', async () => {
   await updateDynamicStatus(client, yahooFinance, topUser);
 
   console.log('Bot is ready.');
-  setInterval(() => {
-    topUser = dbHelper.getLeaderboard(1);
+  setInterval(async () => {
+    topUser = await dbHelper.getLeaderboard(1);
     updateDynamicStatus(client, yahooFinance, topUser)
   }, 600000);
 });
